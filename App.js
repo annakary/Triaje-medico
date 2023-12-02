@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Splash from './Splash';
+import Home from './Home';
+import Information from './Information';
+import PatientInformation from './PatientInformation';
+import PatientList from './PatientList';
+import DischargePatient from './DischargePatient';
+import EmergencyDicharge from './EmergencyDicharge';
+import TriageList from './TriageList';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-    <Splash/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Splash" component={Splash}/>
+      <Stack.Screen name="Home" component={Home}/>
+      <Stack.Screen name="EmergencyDicharge" component={EmergencyDicharge}/>
+      <Stack.Screen name="Information" component={Information}/>
+      <Stack.Screen name="PatientInformation" component={PatientInformation}/>
+      <Stack.Screen name="PatientList" component={PatientList}/>
+      <Stack.Screen name="DischargePatient" component={DischargePatient}/>
+      <Stack.Screen name="TriageList" component={TriageList}/>
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

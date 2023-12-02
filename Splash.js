@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Image, StyleSheet, Animated, Easing } from 'react-native';
 import tw from 'twrnc';
+import { useNavigation } from '@react-navigation/native';
 
 const Splash = () => {
+  const navigation = useNavigation();
+
+ 
+
   const animation = useRef(new Animated.Value(-50)).current;
 
   useEffect(() => {
@@ -25,7 +30,7 @@ const Splash = () => {
   }, [animation]);
 
   return (
-    <View style={tw`flex-1 justify-center items-center relative`}>
+    <View style={tw`flex-1 justify-center items-center relative bg-white`}>
       <Image style={tw`top-10`} source={require('./assets/LogoSplash.png')} />
       <View style={styles.loaderContainer}>
         <Animated.View
