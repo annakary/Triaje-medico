@@ -8,7 +8,7 @@ const DischargePatient = () => {
 
 
   return (
-    <View style={tw`flex-1 items-center justify-center relative`}>
+    <View style={tw`flex-1 items-center justify-center relative bg-white`}>
       <View style={tw`bg-[#102536] w-full top-0 `}>
         <Text style={tw`text-white  text-3xl tracking-widest	pl-5  bottom-5 mt-10`}>Alta de Paciente</Text>
       </View>
