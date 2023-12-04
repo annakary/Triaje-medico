@@ -6,6 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 const PatientList = () => {
   const navigation = useNavigation();
 
+  const handlePatientInformation = () => {
+    navigation.navigate('PatientInformation');
+  };
+
 
   return (
     <View style={tw`flex-1 items-center justify-center relative bg-white`}>
@@ -24,13 +28,66 @@ const PatientList = () => {
         />
       </View>
       <ScrollView>
-
-      <View style={tw`w-full bg-gray-200 mt-10	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+      <TouchableOpacity onPress={handlePatientInformation}>
+ <View style={tw`w-full bg-gray-200 mt-10	 pl-5 pr-45 py-5  items-center rounded-xl`}>
           <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
-          <View style={tw`bg-green-600 rounded-3xl px-2 right-10 top-1`}>
-          <Text style={tw`text-white text-left text-xl tracking-widest`}>Validación</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Validación</Text>
           </View>
         </View>
+      </TouchableOpacity>
+     
+      <TouchableOpacity onPress={handlePatientInformation}>
+      <View style={tw`w-full bg-gray-200 mt-3	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+          <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Status</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+
+       <TouchableOpacity onPress={handlePatientInformation}>
+      <View style={tw`w-full bg-gray-200 mt-3	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+          <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Status</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+       <TouchableOpacity onPress={handlePatientInformation}>
+      <View style={tw`w-full bg-gray-200 mt-3	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+          <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Status</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+       <TouchableOpacity onPress={handlePatientInformation}>
+      <View style={tw`w-full bg-gray-200 mt-3	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+          <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Status</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+       <TouchableOpacity onPress={handlePatientInformation}>
+      <View style={tw`w-full bg-gray-200 mt-3	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+          <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Status</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+       <TouchableOpacity onPress={handlePatientInformation}>
+      <View style={tw`w-full bg-gray-200 mt-3	 pl-5 pr-45 py-5  items-center rounded-xl`}>
+          <Text style={tw`text-black text-left text-2xl tracking-widest`}>Carlos Martinez</Text>
+          <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
+          <Text style={tw`text-white text-left text-lg tracking-wider`}>Status</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+       
+
 
       </ScrollView>
     </View>
