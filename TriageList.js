@@ -27,9 +27,9 @@ const TriageList = () => {
           required
         />
       </View>
-      <ScrollView style={tw`w-full px-5`}>
+      <ScrollView style={tw`w-full flex-grow-1 px-5`}>
 
-        <View style={tw`w-full bg-gray-200  top-10 rounded-xl flex-row `}>
+        <View style={tw`w-full bg-gray-200  mt-5 rounded-xl flex-row `}>
           <Image style={tw`mr-3`} source={require('./assets/triaje-1.png')} />
           <View>
             <Text style={tw`text-black mt-3 text-3xl tracking-widest`}>Carlos Martinez</Text>
@@ -41,7 +41,7 @@ const TriageList = () => {
         </View>
 
 
-        <View style={tw`w-full bg-gray-200 mt-5 	top-10  rounded-xl flex-row`}>
+        <View style={tw`w-full bg-gray-200 	mt-5  rounded-xl flex-row`}>
           <Image style={tw`mr-3 `} source={require('./assets/triaje-2.png')} />
            <View>
             <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
@@ -54,7 +54,7 @@ const TriageList = () => {
 
 
 
-        <View style={tw`w-full bg-gray-200 mt-5	top-10   rounded-xl flex-row`}>
+        <View style={tw`w-full bg-gray-200 mt-5	   rounded-xl flex-row`}>
           <Image style={tw`mr-3 `} source={require('./assets/triaje-3.png')} />
           <View>
             <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
@@ -67,7 +67,7 @@ const TriageList = () => {
 
 
 
-        <View style={tw`w-full bg-gray-200 mt-5	top-10   rounded-xl flex-row`}>
+        <View style={tw`w-full bg-gray-200 mt-5  rounded-xl flex-row`}>
           <Image style={tw`mr-3 `} source={require('./assets/triaje-4.png')} />
           <View>
             <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
@@ -78,7 +78,7 @@ const TriageList = () => {
           </View>
         </View>
 
-        <View style={tw`w-full bg-gray-200 mt-5	top-10   rounded-xl flex-row`}>
+        <View style={tw`w-full bg-gray-200 mt-5	   rounded-xl flex-row`}>
           <Image style={tw`mr-3`} source={require('./assets/triaje-5.png')} />
           <View>
             <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
