@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import tw from 'twrnc';
+import RNPickerSelect from 'react-native-picker-select';
 
 const PatientInformation = () => {
 
@@ -14,6 +15,15 @@ const PatientInformation = () => {
     // Aquí puedes realizar alguna acción con el párrafo ingresado, como guardarlo en el estado o enviarlo a un servidor.
     console.log('Párrafo guardado:', paragraph);
   };
+
+  const [selectedStatus, setSelectedStatus] = useState('');
+  const status = [
+   
+    { label: 'Valoración', value: '1', color: '#175FA9' },
+    { label: 'Consulta', value: '2', color: '#3CA62E' },
+    { label: 'Hospitalización', value: '3', color: '#F6BD00' },
+    { label: 'Alta', value: '4', color: 'gray' },
+  ];
   return (
     <View style={tw`flex-1 bg-white`}>
       <View style={tw`bg-[#102536] w-full top-0`}>
@@ -24,8 +34,14 @@ const PatientInformation = () => {
         <View style={tw` bg-gray-200 mt-10  px-5 py-5 rounded-xl`}>
           <View style={tw` flex-row justify-between`}>
             <Text style={tw`text-black  font-medium text-left text-3xl tracking-widest`}>Carlos Martinez</Text>
-            <TouchableOpacity style={tw`bg-green-600 rounded-3xl px-2`}>
-              <Text style={tw`text-white text-center text-lg mt-1 tracking-wider`}>Validación</Text>
+            <TouchableOpacity style={tw`bg-green-600 rounded-3xl pt-1 px-2`}>
+              <RNPickerSelect
+              onValueChange={(value) => setSelectedStatus(value)}
+              items={status}
+              value={selectedStatus}
+              placeholder={{}}
+              textInputProps={{ style: { fontSize: 20, color: 'white'} }}
+            />
             </TouchableOpacity>
           </View>
 

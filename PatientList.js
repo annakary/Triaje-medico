@@ -10,22 +10,30 @@ const PatientList = () => {
     navigation.navigate('PatientInformation');
   };
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = () => {
+    // Lógica de búsqueda (puedes pasar searchTerm a una función de búsqueda)
+    console.log(`Searching for: ${searchTerm}`);
+  };
+
+  
 
   return (
     <View style={tw`flex-1 items-center justify-center relative bg-white`}>
       <View style={tw`bg-[#102536] w-full top-0 `}>
         <Text style={tw`text-white  text-3xl tracking-widest	pl-5  bottom-5 mt-10`}>Alta de Paciente</Text>
       </View>
-      <View style={tw` mt-5 relative flex-row items-center`}>
-        <Text style={tw`text-xl font-medium text-black mb-2 mr-2`}>Buscar</Text>
+      <View style={tw` mt-5 mx-3 relative flex-row items-center`}>
         <TextInput
-          style={tw`w-80 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg p-2.5`}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCompleteType="email"
-          autoCorrect={false}
-          required
+          style={tw`w-full  shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg p-2.5`}
+          placeholder="Buscar..."
+          value={searchTerm}
+        onChangeText={(text) => setSearchTerm(text)}
         />
+        <TouchableOpacity onPress={handleSearch} style={tw`bg-blue-500 py-3 px-4 rounded-xl ml-auto`}>
+        <Text style={tw`text-white`} >Search</Text>
+      </TouchableOpacity>
       </View>
       <ScrollView>
       <TouchableOpacity onPress={handlePatientInformation}>
