@@ -22,7 +22,7 @@ export default function App() {
       <Stack.Screen name="PatientInformation" component={PatientInformation}/>
       <Stack.Screen name="PatientList" component={PatientList}/>
       <Stack.Screen name="DischargePatient" component={DischargePatient}/>
-      <Stack.Screen name="TriageList" component={DischargePatient}/>
+      <Stack.Screen name="TriageList" component={TriageList}/>
 
       </Stack.Navigator>
     </NavigationContainer>

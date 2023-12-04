@@ -15,6 +15,9 @@ const Home = () => {
   const handlePatientList = () => {
     navigation.navigate('PatientList');
   };
+  const handleTriageList = () => {
+    navigation.navigate('TriageList');
+  };
   const handleInformation = () => {
     navigation.navigate('Information');
   };
@@ -42,6 +45,13 @@ const Home = () => {
         <View style={tw`w-full bg-gray-200 mt-10	 px-15 py-7  items-center rounded-xl`}>
           <Image style={tw` `} source={require('./assets/icono-lista-pacientes.png')} />
           <Text style={tw`text-black mt-5 text-3xl tracking-widest`}>Lista de Pacientes</Text>
+        </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleTriageList}>
+        <View style={tw`w-full bg-gray-200 mt-10	 px-15 py-7  items-center rounded-xl`}>
+          <Image style={tw` `} source={require('./assets/icono-lista-triaje.png')} />
+          <Text style={tw`text-black mt-5 text-3xl tracking-widest`}>Lista de Triaje</Text>
         </View>
         </TouchableOpacity>
         
