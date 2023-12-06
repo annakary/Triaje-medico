@@ -31,7 +31,7 @@ const DischargePatient = () => {
       return false;
     }
     // Validar el formato del CURP
-    const curpRegex = /^[A-Z]{4}[0-9]{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}$/;
+    const curpRegex = /^[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9A-Z]{2}$/;
     if (!curpRegex.test(patientData.curp)) {
       Alert.alert('Formato de CURP incorrecto', 'El CURP debe tener un formato válido');
       return false;
@@ -57,7 +57,13 @@ const DischargePatient = () => {
       Alert.alert('Edad Incorrecta', 'La edad debe ser un número');
       return false;
     }
-    // Puedes agregar más validaciones según tus necesidades
+
+    // Validar el formato de la fecha de nacimiento
+    const dateOfBirthRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateOfBirthRegex.test(patientData.date_of_birth)) {
+      Alert.alert('Formato de Fecha de Nacimiento incorrecto', 'La fecha de nacimiento debe tener el formato "AAAA-MM-DD"');
+      return false;
+    }
     return true; // El formulario es válido
   };
 
@@ -75,14 +81,10 @@ const DischargePatient = () => {
           Alert.alert('Éxito', 'Paciente guardado exitosamente');
         })
         .catch((error) => {
-          Alert.alert('Error', 'Hubo un problema al guardar el paciente');
+          Alert.alert('Error', 'Este paciente ya existe');
         });
     }
   };
-
-
-
-
 
   // Evento para el botón "Guardar"
   const handleSaveButtonPress = () => {
