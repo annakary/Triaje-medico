@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TextInput, Button } from 'react-native';
 import tw from 'twrnc';
 import RNPickerSelect from 'react-native-picker-select';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 const PatientInformation = () => {
   const route = useRoute();
   const { userId } = route.params;
+  const navigation = useNavigation();
 
   const [patientName, setPatientName] = useState('');
   const [firstObservation, setFirstObservation] = useState('');
@@ -59,7 +60,8 @@ const PatientInformation = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Estado guardado:', data);
-        // Puedes realizar cualquier acción adicional después de guardar el estado
+        // Redirige a la pantalla "Home" después de guardar el estado
+        navigation.navigate('Home'); // Asegúrate de que el nombre sea el correcto según tu configuración de navegación
       })
       .catch((error) => {
         console.error('Error al guardar el estado:', error);
@@ -86,7 +88,8 @@ const PatientInformation = () => {
           console.log('Observación guardada:', data);
           // Limpia el estado de la nueva observación después de guardar
           setNewObservation('');
-          // Puedes realizar cualquier acción adicional después de guardar la observación
+          // Redirige a la pantalla "Home" después de guardar la observación
+          navigation.navigate('Home'); // Asegúrate de que el nombre sea el correcto según tu configuración de navegación
         })
         .catch((error) => {
           console.error('Error al guardar la observación:', error);
