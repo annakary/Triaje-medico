@@ -1,139 +1,101 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TextInput, ScrollView,Modal, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
-import RNPickerSelect from 'react-native-picker-select';
-
 
 const TriageList = () => {
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
+  const handleEmergencylist = () => {
+    navigation.navigate('PatientInformation');
   };
 
-  const [selectedTriage, setSelectedTriage] = useState('');
-  const triages = [
-    { label: 'Elige una opción', value: '' },
-    { label: 'Nivel 1 Reanimación', value: '1', color: '#E12D2E' },
-    { label: 'Nivel 2 Emergencia', value: '2', color: '#F08C00'},
-    { label: 'Nivel 3 Urgencia', value: '3', color: '#F6BD00' },
-    { label: 'Nivel 4 No prioritario', value: '4', color: '#3CA62E' },
-    { label: 'Nivel 5 No urgente', value: '5', color: '#175FA9' },
-  ];
- 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [patients, setPatients] = useState([]);
+  const [selectedPatientId, setSelectedPatientId] = useState(null);
+
+  useEffect(() => {
+    fetch('https://ns02.cloud/api/patients')
+      .then((response) => response.json())
+      .then((data) => {
+        const filteredPatients = data.filter(
+          (patient) => {
+            const fullName = `${patient.name} ${patient.lastname}`.toLowerCase();
+            return (
+              (patient.urgency >= 1 && patient.urgency <= 5) &&
+              (fullName.includes(searchTerm.toLowerCase()) || patient.urgency.toString() === searchTerm.toLowerCase()) &&
+              patient.status !== 3
+            );
+          }
+        );
+        setPatients(filteredPatients);
+      })
+      .catch((error) => {
+        console.error('Error al obtener los pacientes:', error);
+      });
+  }, [searchTerm]);
+
+  const handlePatientSelection = (patientId) => {
+    setSelectedPatientId(patientId);
+    navigation.navigate('PatientInformation', { userId: patientId });
+  };
+
+  const getUrgencyColor = (urgency) => {
+    switch (urgency) {
+      case 1:
+        return 'red';
+      case 2:
+        return 'orange';
+      case 3:
+        return '#FFD700';
+      case 4:
+        return 'green';
+      case 5:
+        return 'blue';
+      default:
+        return 'gray';
+    }
+  };
 
   return (
     <View style={tw`flex-1 items-center justify-center relative bg-white`}>
       <View style={tw`bg-[#102536] w-full top-0 `}>
-        <Text style={tw`text-white  text-3xl tracking-widest	pl-5  bottom-5 mt-10`}>Lista de Triaje</Text>
+        <Text style={tw`text-white text-3xl tracking-widest pl-5 bottom-5 mt-10`}>Lista de triaje</Text>
       </View>
-      <View style={tw` mt-5 relative flex-row items-center pb-1`}>
-        <Text style={tw`text-xl font-medium text-black mb-2 mr-2`}>Filtrar</Text>
-        <View style={tw`w-80 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg p-2.5`}>
-        <RNPickerSelect
-        onValueChange={(value) => setSelectedTriage(value)}
-        items={triages}
-        value={selectedTriage}
-        placeholder={{}}
-        textInputProps={{ style: { fontSize: 16, color: 'black', } }}
-
-      
-       
-      />
-        </View>
-       
+      <View style={tw`mt-5 mx-3 relative flex-row items-center`}>
+        <TextInput
+          style={{
+            ...tw`shadow-sm border border-gray-300 text-gray-900 text-xl rounded-lg p-1.5`,
+            width: Dimensions.get('window').width - 100,
+          }}
+          placeholder="Buscar por nombre o urgencia..."
+          value={searchTerm}
+          onChangeText={(text) => setSearchTerm(text)}
+        />
+        <TouchableOpacity onPress={handleEmergencylist} style={tw`bg-blue-500 py-3 px-4 rounded-xl ml-2`}>
+          <Text style={tw`text-white`}>Search</Text>
+        </TouchableOpacity>
       </View>
-      <ScrollView style={tw`w-full flex-grow-1 px-5`}>
-
-        <View style={tw`w-full bg-gray-200  mt-5 rounded-xl flex-row `}>
-          <Image style={tw`mr-3`} source={require('./assets/triaje-1.png')} />
-          <View>
-            <Text style={tw`text-black mt-3 text-3xl tracking-widest`}>Carlos Martinez</Text>
-            <Text style={tw`text-black text-lg tracking-wider mb-2`}>Accidente automovilístico</Text>
-          <TouchableOpacity  onPress={toggleModal} style={tw`bg-gray-300 w-2/4  ml-auto  rounded-lg py-1`}>
-            <Text style={tw`text-black text-lg text-center tracking-wider mb-2`}> Ingresar</Text>
+      <ScrollView>
+        {patients.map((patient) => (
+          <TouchableOpacity
+            key={patient.id}
+            onPress={() => handlePatientSelection(patient.id)}
+          >
+            <View style={tw`w-full bg-gray-200 mt-10 pl-5 pr-45 py-5 items-center rounded-xl`}>
+              <Text style={tw`text-black text-center text-2xl tracking-widest`}>
+                {patient.name} {patient.lastname}
+              </Text>
+              <View style={{ backgroundColor: getUrgencyColor(patient.urgency), ...tw`rounded-full px-3 py-1.5 mr-auto mt-2` }}>
+                <Text style={tw`text-white text-center text-lg tracking-wider`}>
+                  {patient.urgency}
+                </Text>
+              </View>
+            </View>
           </TouchableOpacity>
-          </View>
-        </View>
-
-
-        <View style={tw`w-full bg-gray-200 	mt-5  rounded-xl flex-row`}>
-          <Image style={tw`mr-3 `} source={require('./assets/triaje-2.png')} />
-           <View>
-            <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
-            <Text style={tw`text-black text-lg tracking-wider mb-2`}>Accidente automovilístico</Text>
-          <TouchableOpacity style={tw`bg-gray-300 w-2/4  ml-auto  rounded-lg py-1`}>
-            <Text style={tw`text-black text-lg text-center tracking-wider mb-2`}> Ingresar</Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-
-
-
-        <View style={tw`w-full bg-gray-200 mt-5	   rounded-xl flex-row`}>
-          <Image style={tw`mr-3 `} source={require('./assets/triaje-3.png')} />
-          <View>
-            <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
-            <Text style={tw`text-black text-lg tracking-wider mb-2`}>Accidente automovilístico</Text>
-            <TouchableOpacity style={tw`bg-gray-300 w-2/4  ml-auto  rounded-lg py-1`}>
-            <Text style={tw`text-black text-lg text-center tracking-wider mb-2`}> Ingresar</Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-
-
-
-        <View style={tw`w-full bg-gray-200 mt-5  rounded-xl flex-row`}>
-          <Image style={tw`mr-3 `} source={require('./assets/triaje-4.png')} />
-          <View>
-            <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
-            <Text style={tw`text-black text-lg tracking-wider mb-2`}>Accidente automovilístico</Text>
-            <TouchableOpacity style={tw`bg-gray-300 w-2/4  ml-auto  rounded-lg py-1`}>
-            <Text style={tw`text-black text-lg text-center tracking-wider mb-2`}> Ingresar</Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={tw`w-full bg-gray-200 mt-5	   rounded-xl flex-row`}>
-          <Image style={tw`mr-3`} source={require('./assets/triaje-5.png')} />
-          <View>
-            <Text style={tw`text-black text-3xl mt-3 tracking-widest`}>Carlos Martinez</Text>
-            <Text style={tw`text-black text-lg tracking-wider mb-2`}>Accidente automovilístico</Text>
-            <TouchableOpacity style={tw`bg-gray-300 w-2/4  ml-auto  rounded-lg py-1`}>
-            <Text style={tw`text-black text-lg text-center tracking-wider mb-2`}> Ingresar</Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-
-
+        ))}
       </ScrollView>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        {/* Contenido del modal */}
-        <View style={tw`flex-1 justify-center items-center`}>
-          <View style={tw`bg-white p-5 rounded-lg items-center`}>
-          <Image style={tw`mr-3 `} source={require('./assets/icono-modal.png')} />
-
-            <Text style={tw`text-black text-lg mt-3`}>Aún existe un paciente {'\n'} con mayor prioridad</Text>
-            <TouchableOpacity style={tw`bg-gray-300 w-2/4 m-auto  rounded-lg px-4 py-2 mt-3`} onPress={toggleModal}>
-              <Text style={tw`text-black text-center`}>Aceptar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-
     </View>
-
   );
 };
 

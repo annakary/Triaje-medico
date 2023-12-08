@@ -67,7 +67,7 @@ const Emergencylist = () => {
               </Text>
               <View style={tw`bg-green-600 rounded-3xl px-2 mr-auto top-1`}>
                 <Text style={tw`text-white text-left text-lg tracking-wider`}>
-                  {patient.urgency === null ? 'Validación' : 'Status'}
+                  {patient.urgency === null ? 'Alta' : 'Alta'}
                 </Text>
               </View>
             </View>

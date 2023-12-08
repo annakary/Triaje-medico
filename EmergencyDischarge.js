@@ -85,11 +85,7 @@ const EmergencyDischarge = () => {
 
         <View style={tw`flex flex-col items-center `}>
           <View style={tw`flex flex-row`}>
-            <TouchableOpacity
-              style={tw`w-40  mr-2 bg-[#E12D2E] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center`}
-            >
-              <Text style={tw`text-white font-medium text-center text-xl`}>Cancelar</Text>
-            </TouchableOpacity>
+           
 
             <TouchableOpacity
               style={tw`ml-2  w-40 bg-[#3CA62E] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center`}
