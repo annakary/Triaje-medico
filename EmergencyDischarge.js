@@ -7,15 +7,7 @@ import RNPickerSelect from 'react-native-picker-select';
 const EmergencyDischarge = () => {
   const navigation = useNavigation();
   const route = useRoute(); // Obtiene el parámetro de la ruta
-  const [selectedTriage, setSelectedTriage] = useState('');
-  const triages = [
-    { label: 'Nivel 1 Reanimación', value: '1', color: '#E12D2E' },
-    { label: 'Nivel 2 Emergencia', value: '2', color: '#F08C00' },
-    { label: 'Nivel 3 Urgencia', value: '3', color: '#F6BD00' },
-    { label: 'Nivel 4 No prioritario', value: '4', color: '#3CA62E' },
-    { label: 'Nivel 5 No urgente', value: '5', color: '#175FA9' },
-  ];
-
+  const [selectedTriage, setSelectedTriage] = useState(1); // Inicializar con un valor predeterminado (por ejemplo, 1)
   const [paragraph, setParagraph] = useState('');
 
   const handleInputChange = (text) => {
@@ -51,6 +43,14 @@ const EmergencyDischarge = () => {
     }
   };
 
+  const triages = [
+    { label: 'Nivel 1 Reanimación', value: 1, color: '#E12D2E' },
+    { label: 'Nivel 2 Emergencia', value: 2, color: '#F08C00' },
+    { label: 'Nivel 3 Urgencia', value: 3, color: '#F6BD00' },
+    { label: 'Nivel 4 No prioritario', value: 4, color: '#3CA62E' },
+    { label: 'Nivel 5 No urgente', value: 5, color: '#175FA9' },
+  ];
+
   return (
     <View style={tw`flex-1 items-center justify-center relative bg-white`}>
       <View style={tw`bg-[#102536] w-full top-0 `}>
@@ -83,12 +83,10 @@ const EmergencyDischarge = () => {
           />
         </View>
 
-        <View style={tw`flex flex-col items-center `}>
+        <View style={tw`flex flex-col items-center`}>
           <View style={tw`flex flex-row`}>
-           
-
             <TouchableOpacity
-              style={tw`ml-2  w-40 bg-[#3CA62E] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center`}
+              style={tw`ml-2 w-40 bg-[#3CA62E] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center`}
               onPress={handleSaveChanges} // Llama a handleSaveChanges al presionar
             >
               <Text style={tw`text-white font-medium text-center text-xl`}>Guardar</Text>

@@ -18,16 +18,18 @@ const TriageList = () => {
     fetch('https://ns02.cloud/api/patients')
       .then((response) => response.json())
       .then((data) => {
-        const filteredPatients = data.filter(
-          (patient) => {
+        const filteredPatients = data
+          .filter((patient) => {
             const fullName = `${patient.name} ${patient.lastname}`.toLowerCase();
             return (
               (patient.urgency >= 1 && patient.urgency <= 5) &&
               (fullName.includes(searchTerm.toLowerCase()) || patient.urgency.toString() === searchTerm.toLowerCase()) &&
               patient.status !== 3
             );
-          }
-        );
+          })
+          .sort((a, b) => a.urgency - b.urgency) // Ordenar por urgencia ascendente
+          .slice(0, 5); // Limitar a los primeros 5 pacientes
+
         setPatients(filteredPatients);
       })
       .catch((error) => {
