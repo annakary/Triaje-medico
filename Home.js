@@ -6,8 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 const Home = () => {
   const navigation = useNavigation();
 
-  const handleEmergencyDicharge = () => {
-    navigation.navigate('EmergencyDicharge');
+  const handleEmergencyList = () => {
+    navigation.navigate('Emergencylist'); // Redirige a 'Emergencylist'
   };
   const handleDischargePatient = () => {
     navigation.navigate('DischargePatient');
@@ -28,12 +28,12 @@ const Home = () => {
         <Text style={tw`text-white  text-3xl tracking-widest	pl-5  bottom-5 mt-10`}>Triaje Médico</Text>
       </View>
       <ScrollView>
-        <TouchableOpacity onPress={handleEmergencyDicharge}>
-          <View style={tw`w-full bg-gray-200	top-10 px-15 py-7  items-center rounded-xl`}>
-            <Image style={tw` `} source={require('./assets/icono-urgencia.png')} />
-            <Text style={tw`text-black mt-5 text-3xl tracking-widest`}>Alta de Urgencia</Text>
-          </View>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={handleEmergencyList}>
+        <View style={tw`w-full bg-gray-200	top-10 px-15 py-7  items-center rounded-xl`}>
+          <Image style={tw` `} source={require('./assets/icono-urgencia.png')} />
+          <Text style={tw`text-black mt-5 text-3xl tracking-widest`}>Alta de Urgencia</Text>
+        </View>
+      </TouchableOpacity>
         <TouchableOpacity onPress={handleDischargePatient}>
         <View style={tw`w-full bg-gray-200 mt-20	 px-15 py-7  items-center rounded-xl`}>
           <Image style={tw` `} source={require('./assets/icono-alta-paciente.png')} />
